@@ -1,6 +1,8 @@
+import java.io.File;
 import java.io.FileInputStream;  
 import java.io.IOException;  
-import java.util.HashMap;  
+import java.util.HashMap;
+import java.util.Scanner;  
   
 /** 
  * @author guoxk 
@@ -33,9 +35,8 @@ public class CheckFileTypeUtil {
         mFileTypes.put("D0CF11E0", "xls");//excel2003版本文件  
         mFileTypes.put("5374616E64617264204A", "mdb");  
         mFileTypes.put("252150532D41646F6265", "ps");  
-        mFileTypes.put("255044462D312E", "pdf");  
-        mFileTypes.put("504B0304", "docx");  
-        mFileTypes.put("504B0304", "xlsx");//excel2007以上版本文件  
+        mFileTypes.put("255044462D312E", "pdf");   
+        mFileTypes.put("504B0304", "zip/docs/xlsx");//excel2007以上版本文件  
         mFileTypes.put("52617221", "rar");  
         mFileTypes.put("57415645", "wav");  
         mFileTypes.put("41564920", "avi");  
@@ -46,6 +47,7 @@ public class CheckFileTypeUtil {
         mFileTypes.put("3026B2758E66CF11", "asf");  
         mFileTypes.put("4D546864", "mid");  
         mFileTypes.put("1F8B08", "gz");  
+        mFileTypes.put("B1BED7CA", "txt");
     }  
   
     /** 
@@ -84,6 +86,7 @@ public class CheckFileTypeUtil {
             is.read(b, 0, b.length);  
             value = bytesToHexString(b);  
         } catch (Exception e) {  
+        	e.printStackTrace();
         } finally {  
             if (null != is) {  
                 try {  
@@ -91,7 +94,7 @@ public class CheckFileTypeUtil {
                 } catch (IOException e) {  
                 }  
             }  
-        }  
+        }
         return value;  
     }  
   
@@ -118,14 +121,32 @@ public class CheckFileTypeUtil {
         }  
       System.out.println(builder.toString());  
         return builder.toString();  
-    }  
+    }
+    private static File file;
 	public static void main(String[] args) {
-		if(args.length==0) {
-			System.out.println("usage:java XXX filePath");
-			System.exit(0);
-		}
-        final String fileType = getFileType(args[0]);  
-        System.out.println(fileType); 
+        System.out.println("请输入文件路径：");
+        Scanner scanner = new Scanner(System.in);
+        String filePath = scanner.nextLine();
+        file = new File(filePath);
+        if(file.exists()) {
+	        if(file.isFile()) {
+	            final String fileType = getFileType(filePath);  
+	            System.out.println("文件类型："+fileType); 
+	        }else if(file.isDirectory()) {
+	        	String[] fileNames = file.list();
+	        	for(int i=0;i<fileNames.length;i++) {
+	        		System.out.println((i+1)+" "+fileNames[i]);
+	        	}
+	        	System.out.println("请输入文件序号：");
+	        	String index = scanner.nextLine();
+	        	String fn = fileNames[Integer.parseInt(index)-1];
+	            final String fileType = getFileType(filePath+File.separator+fn);  
+	            System.out.println("文件类型："+fileType); 
+	        }else {
+	        	System.out.println("文件或者目录不存在！");
+	        }
+        }
+        scanner.close();
 	}
 
 }
