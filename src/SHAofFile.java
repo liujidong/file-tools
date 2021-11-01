@@ -9,10 +9,10 @@ public class SHAofFile {
 			System.err.println("Usage:SHAofFile SHA-n file");
 			System.exit(-1);
 		}
-		//hashType  ¼ÓÃÜÀàĞÍ £¨MD5 ºÍ SHA£©
+		//hashType  åŠ å¯†ç±»å‹ ï¼ˆMD5 å’Œ SHAï¼‰
 		byte[] mds= MessageDigest.getInstance(args[0]).digest(Files.readAllBytes(Paths.get(args[1])));
         StringBuffer strHexString = new StringBuffer();  
-        // ±éšv byte buffer  
+        // éæ­· byte buffer  
         for (int i = 0; i < mds.length; i++)  
         {  
           String hex = Integer.toHexString(0xff & mds[i]);  

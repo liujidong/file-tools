@@ -7,16 +7,16 @@ import java.util.Scanner;
 /** 
  * @author guoxk 
  *  
- * @version ´´½¨Ê±¼ä 2016Äê7ÔÂ17ÈÕ ÉÏÎç10:47:26 
+ * @version åˆ›å»ºæ—¶é—´ 2016å¹´7æœˆ17æ—¥ ä¸Šåˆ10:47:26 
  *  
- * ÀàÃèÊö£º»ñÈ¡ºÍÅĞ¶ÏÎÄ¼şÍ·ĞÅÏ¢  
- *    |--ÎÄ¼şÍ·ÊÇÎ»ÓÚÎÄ¼ş¿ªÍ·µÄÒ»¶Î³Ğµ£Ò»¶¨ÈÎÎñµÄÊı¾İ£¬Ò»°ã¶¼ÔÚ¿ªÍ·µÄ²¿·Ö¡£ 
- *    |--Í·ÎÄ¼ş×÷ÎªÒ»ÖÖ°üº¬¹¦ÄÜº¯Êı¡¢Êı¾İ½Ó¿ÚÉùÃ÷µÄÔØÌåÎÄ¼ş£¬ÓÃÓÚ±£´æ³ÌĞòµÄÉùÃ÷(declaration),¶ø¶¨ÒåÎÄ¼şÓÃÓÚ±£´æ³ÌĞòµÄÊµÏÖ(implementation)¡£ 
- *    |--ÎªÁË½â¾öÔÚÓÃ»§ÉÏ´«ÎÄ¼şµÄÊ±ºòÔÚ·şÎñÆ÷¶ËÅĞ¶ÏÎÄ¼şÀàĞÍµÄÎÊÌâ£¬¹ÊÓÃ»ñÈ¡ÎÄ¼şÍ·µÄ·½Ê½£¬Ö±½Ó¶ÁÈ¡ÎÄ¼şµÄÇ°¼¸¸ö×Ö½Ú£¬À´ÅĞ¶ÏÉÏ´«ÎÄ¼şÊÇ·ñ·ûºÏ¸ñÊ½¡£ 
+ * ç±»æè¿°ï¼šè·å–å’Œåˆ¤æ–­æ–‡ä»¶å¤´ä¿¡æ¯  
+ *    |--æ–‡ä»¶å¤´æ˜¯ä½äºæ–‡ä»¶å¼€å¤´çš„ä¸€æ®µæ‰¿æ‹…ä¸€å®šä»»åŠ¡çš„æ•°æ®ï¼Œä¸€èˆ¬éƒ½åœ¨å¼€å¤´çš„éƒ¨åˆ†ã€‚ 
+ *    |--å¤´æ–‡ä»¶ä½œä¸ºä¸€ç§åŒ…å«åŠŸèƒ½å‡½æ•°ã€æ•°æ®æ¥å£å£°æ˜çš„è½½ä½“æ–‡ä»¶ï¼Œç”¨äºä¿å­˜ç¨‹åºçš„å£°æ˜(declaration),è€Œå®šä¹‰æ–‡ä»¶ç”¨äºä¿å­˜ç¨‹åºçš„å®ç°(implementation)ã€‚ 
+ *    |--ä¸ºäº†è§£å†³åœ¨ç”¨æˆ·ä¸Šä¼ æ–‡ä»¶çš„æ—¶å€™åœ¨æœåŠ¡å™¨ç«¯åˆ¤æ–­æ–‡ä»¶ç±»å‹çš„é—®é¢˜ï¼Œæ•…ç”¨è·å–æ–‡ä»¶å¤´çš„æ–¹å¼ï¼Œç›´æ¥è¯»å–æ–‡ä»¶çš„å‰å‡ ä¸ªå­—èŠ‚ï¼Œæ¥åˆ¤æ–­ä¸Šä¼ æ–‡ä»¶æ˜¯å¦ç¬¦åˆæ ¼å¼ã€‚ 
  *  
  */ 
 public class CheckFileTypeUtil {
-    // »º´æÎÄ¼şÍ·ĞÅÏ¢-ÎÄ¼şÍ·ĞÅÏ¢  
+    // ç¼“å­˜æ–‡ä»¶å¤´ä¿¡æ¯-æ–‡ä»¶å¤´ä¿¡æ¯  
     public static final HashMap<String, String> mFileTypes = new HashMap<String, String>();  
     static {  
         // images  
@@ -27,16 +27,16 @@ public class CheckFileTypeUtil {
         mFileTypes.put("424D", "bmp");  
         mFileTypes.put("41433130", "dwg"); // CAD  
         mFileTypes.put("38425053", "psd");  
-        mFileTypes.put("7B5C727466", "rtf"); // ÈÕ¼Ç±¾  
+        mFileTypes.put("7B5C727466", "rtf"); // æ—¥è®°æœ¬  
         mFileTypes.put("3C3F786D6C", "xml");  
         mFileTypes.put("68746D6C3E", "html");  
-        mFileTypes.put("44656C69766572792D646174653A", "eml"); // ÓÊ¼ş  
+        mFileTypes.put("44656C69766572792D646174653A", "eml"); // é‚®ä»¶  
         mFileTypes.put("D0CF11E0", "doc");  
-        mFileTypes.put("D0CF11E0", "xls");//excel2003°æ±¾ÎÄ¼ş  
+        mFileTypes.put("D0CF11E0", "xls");//excel2003ç‰ˆæœ¬æ–‡ä»¶  
         mFileTypes.put("5374616E64617264204A", "mdb");  
         mFileTypes.put("252150532D41646F6265", "ps");  
         mFileTypes.put("255044462D312E", "pdf");   
-        mFileTypes.put("504B0304", "zip/docs/xlsx");//excel2007ÒÔÉÏ°æ±¾ÎÄ¼ş  
+        mFileTypes.put("504B0304", "zip/docs/xlsx");//excel2007ä»¥ä¸Šç‰ˆæœ¬æ–‡ä»¶  
         mFileTypes.put("52617221", "rar");  
         mFileTypes.put("57415645", "wav");  
         mFileTypes.put("41564920", "avi");  
@@ -53,9 +53,9 @@ public class CheckFileTypeUtil {
     /** 
      * @author guoxk 
      * 
-     * ·½·¨ÃèÊö£º¸ù¾İÎÄ¼şÂ·¾¶»ñÈ¡ÎÄ¼şÍ·ĞÅÏ¢ 
-     * @param filePath ÎÄ¼şÂ·¾¶ 
-     * @return ÎÄ¼şÍ·ĞÅÏ¢ 
+     * æ–¹æ³•æè¿°ï¼šæ ¹æ®æ–‡ä»¶è·¯å¾„è·å–æ–‡ä»¶å¤´ä¿¡æ¯ 
+     * @param filePath æ–‡ä»¶è·¯å¾„ 
+     * @return æ–‡ä»¶å¤´ä¿¡æ¯ 
      */  
     public static String getFileType(String filePath) {  
 //      System.out.println(getFileHeader(filePath));  
@@ -66,9 +66,9 @@ public class CheckFileTypeUtil {
     /** 
      * @author guoxk 
      * 
-     * ·½·¨ÃèÊö£º¸ù¾İÎÄ¼şÂ·¾¶»ñÈ¡ÎÄ¼şÍ·ĞÅÏ¢ 
-     * @param filePath ÎÄ¼şÂ·¾¶ 
-     * @return ÎÄ¼şÍ·ĞÅÏ¢ 
+     * æ–¹æ³•æè¿°ï¼šæ ¹æ®æ–‡ä»¶è·¯å¾„è·å–æ–‡ä»¶å¤´ä¿¡æ¯ 
+     * @param filePath æ–‡ä»¶è·¯å¾„ 
+     * @return æ–‡ä»¶å¤´ä¿¡æ¯ 
      */  
     public static String getFileHeader(String filePath) {  
         FileInputStream is = null;  
@@ -77,11 +77,11 @@ public class CheckFileTypeUtil {
             is = new FileInputStream(filePath);  
             byte[] b = new byte[4];  
             /* 
-             * int read() ´Ó´ËÊäÈëÁ÷ÖĞ¶ÁÈ¡Ò»¸öÊı¾İ×Ö½Ú¡£
-             * int read(byte[] b) ´Ó´ËÊäÈëÁ÷ÖĞ½«×î¶à b.length    
-             * * ¸ö×Ö½ÚµÄÊı¾İ¶ÁÈëÒ»¸ö byte Êı×éÖĞ¡£
+             * int read() ä»æ­¤è¾“å…¥æµä¸­è¯»å–ä¸€ä¸ªæ•°æ®å­—èŠ‚ã€‚
+             * int read(byte[] b) ä»æ­¤è¾“å…¥æµä¸­å°†æœ€å¤š b.length    
+             * * ä¸ªå­—èŠ‚çš„æ•°æ®è¯»å…¥ä¸€ä¸ª byte æ•°ç»„ä¸­ã€‚
              * int read(byte[] b, int off, int len) 
-             * * ´Ó´ËÊäÈëÁ÷ÖĞ½«×î¶à len ¸ö×Ö½ÚµÄÊı¾İ¶ÁÈëÒ»¸ö byte Êı×éÖĞ¡£ 
+             * * ä»æ­¤è¾“å…¥æµä¸­å°†æœ€å¤š len ä¸ªå­—èŠ‚çš„æ•°æ®è¯»å…¥ä¸€ä¸ª byte æ•°ç»„ä¸­ã€‚ 
              */  
             is.read(b, 0, b.length);  
             value = bytesToHexString(b);  
@@ -101,9 +101,9 @@ public class CheckFileTypeUtil {
     /** 
      * @author guoxk 
      * 
-     * ·½·¨ÃèÊö£º½«Òª¶ÁÈ¡ÎÄ¼şÍ·ĞÅÏ¢µÄÎÄ¼şµÄbyteÊı×é×ª»»³ÉstringÀàĞÍ±íÊ¾ 
-     * @param src Òª¶ÁÈ¡ÎÄ¼şÍ·ĞÅÏ¢µÄÎÄ¼şµÄbyteÊı×é 
-     * @return   ÎÄ¼şÍ·ĞÅÏ¢ 
+     * æ–¹æ³•æè¿°ï¼šå°†è¦è¯»å–æ–‡ä»¶å¤´ä¿¡æ¯çš„æ–‡ä»¶çš„byteæ•°ç»„è½¬æ¢æˆstringç±»å‹è¡¨ç¤º 
+     * @param src è¦è¯»å–æ–‡ä»¶å¤´ä¿¡æ¯çš„æ–‡ä»¶çš„byteæ•°ç»„ 
+     * @return   æ–‡ä»¶å¤´ä¿¡æ¯ 
      */  
     private static String bytesToHexString(byte[] src) {  
         StringBuilder builder = new StringBuilder();  
@@ -112,7 +112,7 @@ public class CheckFileTypeUtil {
         }  
         String hv;  
         for (int i = 0; i < src.length; i++) {  
-            // ÒÔÊ®Áù½øÖÆ£¨»ùÊı 16£©ÎŞ·ûºÅÕûÊıĞÎÊ½·µ»ØÒ»¸öÕûÊı²ÎÊıµÄ×Ö·û´®±íÊ¾ĞÎÊ½£¬²¢×ª»»Îª´óĞ´  
+            // ä»¥åå…­è¿›åˆ¶ï¼ˆåŸºæ•° 16ï¼‰æ— ç¬¦å·æ•´æ•°å½¢å¼è¿”å›ä¸€ä¸ªæ•´æ•°å‚æ•°çš„å­—ç¬¦ä¸²è¡¨ç¤ºå½¢å¼ï¼Œå¹¶è½¬æ¢ä¸ºå¤§å†™  
             hv = Integer.toHexString(src[i] & 0xFF).toUpperCase();  
             if (hv.length() < 2) {  
                 builder.append(0);  
@@ -124,26 +124,26 @@ public class CheckFileTypeUtil {
     }
     private static File file;
 	public static void main(String[] args) {
-        System.out.println("ÇëÊäÈëÎÄ¼şÂ·¾¶£º");
+        System.out.println("è¯·è¾“å…¥æ–‡ä»¶è·¯å¾„ï¼š");
         Scanner scanner = new Scanner(System.in);
         String filePath = scanner.nextLine();
         file = new File(filePath);
         if(file.exists()) {
 	        if(file.isFile()) {
 	            final String fileType = getFileType(filePath);  
-	            System.out.println("ÎÄ¼şÀàĞÍ£º"+fileType); 
+	            System.out.println("æ–‡ä»¶ç±»å‹ï¼š"+fileType); 
 	        }else if(file.isDirectory()) {
 	        	String[] fileNames = file.list();
 	        	for(int i=0;i<fileNames.length;i++) {
 	        		System.out.println((i+1)+" "+fileNames[i]);
 	        	}
-	        	System.out.println("ÇëÊäÈëÎÄ¼şĞòºÅ£º");
+	        	System.out.println("è¯·è¾“å…¥æ–‡ä»¶åºå·ï¼š");
 	        	String index = scanner.nextLine();
 	        	String fn = fileNames[Integer.parseInt(index)-1];
 	            final String fileType = getFileType(filePath+File.separator+fn);  
-	            System.out.println("ÎÄ¼şÀàĞÍ£º"+fileType); 
+	            System.out.println("æ–‡ä»¶ç±»å‹ï¼š"+fileType); 
 	        }else {
-	        	System.out.println("ÎÄ¼ş»òÕßÄ¿Â¼²»´æÔÚ£¡");
+	        	System.out.println("æ–‡ä»¶æˆ–è€…ç›®å½•ä¸å­˜åœ¨ï¼");
 	        }
         }
         scanner.close();
