@@ -1,17 +1,17 @@
 import java.awt.Graphics2D;
-import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
 public class ImgTool {
 	public static void main(String[] args) throws Exception{
 		//imageSub();
-		imgBG();
+		imgBG("C:/Users/USER/Pictures/PANO/todo");
+		//imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211001_083357.jpg", 45);
+		//imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211001_083302.jpg", 45);
 	}
 	//剪切图片
 	public static void imageSub(){
@@ -37,12 +37,12 @@ public class ImgTool {
 		}
 
 	}
-	//补全背景
-	public static void imgBG() throws IOException{
+	//补全背景(补全为2：1的全景)
+	public static void imgBG(String dirPath) throws IOException{
 		 /** 
          * 要处理的图片目录 
          */ 
-        File dir = new File("C:/Users/USER/Pictures/PANO");
+        File dir = new File(dirPath);
         /** 
          * 列出目录中的图片，得到数组 
          */ 
@@ -153,4 +153,35 @@ public class ImgTool {
 //	           ops.close(); 	         
         }
 	}
+	//通过角度拓展图片宽度（0,360）
+    public static void imgWidth(String filePath,int angle) throws IOException{
+    	if(angle<=0||angle>=360) {
+    		System.out.println("angle mast in (0,360)");
+    		System.exit(0);
+    	}
+    	File file = new File(filePath);
+        BufferedImage bi = ImageIO.read(file); 
+        int width = bi.getWidth(); 
+        int widthNew = 360*width/(360-angle);
+        System.out.println(widthNew);
+        int height = bi.getHeight();
+       BufferedImage outImage =  new BufferedImage(widthNew, height,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
+       Graphics2D graphics2D = outImage.createGraphics();// 2.获取图片画笔 
+       // 设置图片位置
+       graphics2D.drawImage(bi, 0,0, null);
+       graphics2D.dispose();
+       //生成新的图片
+       String extension=filePath.substring(filePath.lastIndexOf(".")+1,filePath.length()); 
+       //创建输出目录
+       File dirOut = new File(file.getParent(),"out");        
+       if(dirOut.exists()==false) {
+       	dirOut.mkdir();
+       }
+       String fileName = file.getName();
+       ImageIO.write(outImage, extension, new File(dirOut,fileName));
+       
+       System.out.println("\t处理完毕："+fileName); 
+       System.out.println(); 
+
+    }
 }
