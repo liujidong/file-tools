@@ -84,9 +84,15 @@ public class ImgTool {
 	          */ 
 	         int width = bi.getWidth(); 
 	         int height = bi.getHeight();
-	         if(width<=height*2) {continue;}
-	         int minx = bi.getMinX(); 
-	         int miny = bi.getMinY(); 
+	         if(width/height<=2) {
+	        	 System.out.println("w:h is ["+width/height+":1]	"+files[x].getName());
+	        	 continue;
+	        }
+	         if(width/height<4) {
+	        	 System.out.println("w:h is "+width/height+":1	"+files[x].getName());
+	         }
+//	         int minx = bi.getMinX(); 
+//	         int miny = bi.getMinY(); 
 	         String fileName = files[x].getName();
 	         System.out.println("正在处理："+fileName);
 	         //System.out.println(width+","+minx+","+miny);
@@ -126,7 +132,7 @@ public class ImgTool {
 //	              
 //	            } 
 //	           } 
-
+	         if(width % 2 > 0 ) {width++;};
 	       BufferedImage outImage =  new BufferedImage(width, width/2,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
 	       Graphics2D graphics2D = outImage.createGraphics();// 2.获取图片画笔
 //	       outImage = graphics2D.getDeviceConfiguration().createCompatibleImage(width, width/2, Transparency.TRANSLUCENT);
@@ -154,15 +160,15 @@ public class ImgTool {
         }
 	}
 	//通过角度拓展图片宽度（0,360）
-    public static void imgWidth(String filePath,int angle) throws IOException{
-    	if(angle<=0||angle>=360) {
+    public static void imgWidth(String filePath,int degree) throws IOException{
+    	if(degree<=0||degree>=360) {
     		System.out.println("angle mast in (0,360)");
     		System.exit(0);
     	}
     	File file = new File(filePath);
         BufferedImage bi = ImageIO.read(file); 
         int width = bi.getWidth(); 
-        int widthNew = 360*width/(360-angle);
+        int widthNew = 360*width/(360-degree);
         System.out.println(widthNew);
         int height = bi.getHeight();
        BufferedImage outImage =  new BufferedImage(widthNew, height,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
