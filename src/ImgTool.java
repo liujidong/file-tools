@@ -9,11 +9,26 @@ import javax.imageio.ImageIO;
 public class ImgTool {
 	public static void main(String[] args) throws Exception{
 		//imageSub();
-		imgBG("C:/Users/USER/Pictures/PANO/todo");
-		//imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211001_083357.jpg", 45);
-		//imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211001_083302.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_150117.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_150926.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151100.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151427.jpg", 60);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151457.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151549.jpg", 90);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_152126.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_152212.jpg", 90);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_153142.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_154555.jpg", 60);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_155923.jpg", 45);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_160336.jpg", 60);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_160955.jpg", 60);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_161058.jpg", 60);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_163511.jpg", 90);
+//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_163552.jpg", 90);
+		//imgWidthAuto("C:\\Users\\USER\\Pictures\\PANO\\");
+		imgBG("C:/Users/USER/Pictures/PANO/todo/");
 	}
-	//剪切图片
+	//批量裁剪图片
 	public static void imageSub(){
 		for (int i = 2795; i <= 2825; i++) {
 			File f = new File("C:\\Users\\USER\\Pictures\\Screenshots\\屏幕截图("+i+").png");
@@ -160,34 +175,67 @@ public class ImgTool {
         }
 	}
 	//通过角度拓展图片宽度（0,360）
-    public static void imgWidth(String filePath,int degree) throws IOException{
-    	if(degree<=0||degree>=360) {
+    public static void imgWidth(File file,int degree) throws IOException{
+    	if(degree<0||degree>=360) {
     		System.out.println("angle mast in (0,360)");
     		System.exit(0);
     	}
-    	File file = new File(filePath);
         BufferedImage bi = ImageIO.read(file); 
-        int width = bi.getWidth(); 
-        int widthNew = 360*width/(360-degree);
-        System.out.println(widthNew);
+        int width = bi.getWidth();
         int height = bi.getHeight();
+        int widthNew = height * 4;
+        if(degree>0) {
+        	widthNew = 360*width/(360-degree);
+        }
+        if(widthNew<=width) return;
+        System.out.println(widthNew);
        BufferedImage outImage =  new BufferedImage(widthNew, height,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
        Graphics2D graphics2D = outImage.createGraphics();// 2.获取图片画笔 
        // 设置图片位置
        graphics2D.drawImage(bi, 0,0, null);
        graphics2D.dispose();
-       //生成新的图片
-       String extension=filePath.substring(filePath.lastIndexOf(".")+1,filePath.length()); 
+       
        //创建输出目录
        File dirOut = new File(file.getParent(),"out");        
        if(dirOut.exists()==false) {
        	dirOut.mkdir();
        }
+       //生成新的图片
        String fileName = file.getName();
+       String extension=fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());        
        ImageIO.write(outImage, extension, new File(dirOut,fileName));
        
        System.out.println("\t处理完毕："+fileName); 
        System.out.println(); 
 
     }
+    public static void imgWidth(String filePath,int degree) throws IOException{
+    	File file = new File(filePath);
+    	imgWidth(file, degree);
+    }    
+	public static void imgWidthAuto(String dirPath) throws IOException{
+		 /** 
+        * 要处理的图片目录 
+        */ 
+       File dir = new File(dirPath);
+       /** 
+        * 列出目录中的图片，得到数组 
+        */ 
+       File[] files = dir.listFiles(new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				//return Arrays.asList(".png",".jpg").contains(name);
+				return name.endsWith(".jpg") || name.endsWith(".png");
+			}
+		});
+       //创建输出目录
+       File dirOut = new File(dir,"out");        
+       if(dirOut.exists()==false&& files.length>0) {
+       	dirOut.mkdir();
+       }
+       for (File file : files) {
+		imgWidth(file, 0);
+       }
+	}
 }
