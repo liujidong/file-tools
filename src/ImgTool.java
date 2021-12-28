@@ -28,30 +28,7 @@ public class ImgTool {
 		//imgWidthAuto("C:\\Users\\USER\\Pictures\\PANO\\");
 		imgBG("C:/Users/USER/Pictures/PANO/todo/");
 	}
-	//批量裁剪图片
-	public static void imageSub(){
-		for (int i = 2795; i <= 2825; i++) {
-			File f = new File("C:\\Users\\USER\\Pictures\\Screenshots\\屏幕截图("+i+").png");
-			try {
-				String fileName = f.getName();
-				String extension=fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
-				String name = fileName.substring(0,fileName.lastIndexOf("."));		
-				System.out.println(fileName);
-//			System.out.println(name);
-//			System.out.println(extension);
-				//if(true){ return;}
-				BufferedImage bufImage = ImageIO.read(f);
-				BufferedImage subImage = bufImage.getSubimage (393,163, 1467, 829);
-
-				File fo = new File(f.getParent(),name+".sub."+extension);
-				ImageIO.write(subImage, extension, fo);
-			} catch (IOException e) {
-				System.err.println("error at:"+f.getAbsolutePath());
-				//e.printStackTrace();
-			}				
-		}
-
-	}
+	
 	//补全背景(补全为2：1的全景)
 	public static void imgBG(String dirPath) throws IOException{
 		 /** 
