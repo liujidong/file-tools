@@ -9,28 +9,15 @@ import javax.imageio.ImageIO;
 public class ImgTool {
 	public static void main(String[] args) throws Exception{
 		//imageSub();
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_150117.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_150926.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151100.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151427.jpg", 60);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151457.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_151549.jpg", 90);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_152126.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_152212.jpg", 90);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_153142.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_154555.jpg", 60);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_155923.jpg", 45);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_160336.jpg", 60);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_160955.jpg", 60);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_161058.jpg", 60);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_163511.jpg", 90);
-//		imgWidth("C:\\Users\\USER\\Pictures\\PANO\\PANO_20211004_163552.jpg", 90);
+		//extendWidth("D:\\data\\PANO\\PANO_20211211_151937.jpg", 45);
+		//extendWidth("D:\\data\\PANO\\PANO_20211211_152151.jpg", 45);
 		//imgWidthAuto("C:\\Users\\USER\\Pictures\\PANO\\");
-		imgBG("C:/Users/USER/Pictures/PANO/todo/");
+		pano2_1("D:\\data\\PANO2\\join");
+
 	}
 	
-	//补全背景(补全为2：1的全景)
-	public static void imgBG(String dirPath) throws IOException{
+	//补全照片(补全为2：1的全景)
+	public static void pano2_1(String dirPath) throws IOException{
 		 /** 
          * 要处理的图片目录 
          */ 
@@ -43,7 +30,7 @@ public class ImgTool {
 			@Override
 			public boolean accept(File dir, String name) {
 				//return Arrays.asList(".png",".jpg").contains(name);
-				return name.endsWith(".jpg") || name.endsWith(".png");
+				return name.endsWith(".jpg") || name.endsWith(".png")||name.endsWith(".JPG");
 			}
 		});
         //创建输出目录
@@ -58,7 +45,7 @@ public class ImgTool {
 	         /** 
 	          * 定义一个RGB的数组，因为图片的RGB模式是由三个 0-255来表示的 比如白色就是(255,255,255) 
 	          */ 
-	         int[] rgb = new int[3]; 
+	         //int[] rgb = new int[3];
 	         /** 
 	          * 用来处理图片的缓冲流 
 	          */ 
@@ -123,9 +110,8 @@ public class ImgTool {
 //	             } 
 //	              
 //	            } 
-//	           } 
-	         if(width % 2 > 0 ) {width++;};
-	       BufferedImage outImage =  new BufferedImage(width, width/2,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
+//	           }
+	       BufferedImage outImage =  BufferedImageUtil.initBufferedImage(bi);//new BufferedImage(width, width/2,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
 	       Graphics2D graphics2D = outImage.createGraphics();// 2.获取图片画笔
 //	       outImage = graphics2D.getDeviceConfiguration().createCompatibleImage(width, width/2, Transparency.TRANSLUCENT);
 //	       		graphics2D.dispose();
@@ -152,7 +138,7 @@ public class ImgTool {
         }
 	}
 	//通过角度拓展图片宽度（0,360）
-    public static void imgWidth(File file,int degree) throws IOException{
+    private static void extendWidth(File file,int degree) throws IOException{
     	if(degree<0||degree>=360) {
     		System.out.println("angle mast in (0,360)");
     		System.exit(0);
@@ -164,7 +150,7 @@ public class ImgTool {
         if(degree>0) {
         	widthNew = 360*width/(360-degree);
         }
-        if(widthNew<=width) return;
+        if(widthNew<=width) {return;}
         System.out.println(widthNew);
        BufferedImage outImage =  new BufferedImage(widthNew, height,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
        Graphics2D graphics2D = outImage.createGraphics();// 2.获取图片画笔 
@@ -186,11 +172,19 @@ public class ImgTool {
        System.out.println(); 
 
     }
-    public static void imgWidth(String filePath,int degree) throws IOException{
+
+	/**
+	 * //拓展图片宽度（0,360）
+	 * @param filePath
+	 * @param degree 增加的角度
+	 * @throws IOException
+	 */
+    public static void extendWidth(String filePath,int degree) throws IOException{
     	File file = new File(filePath);
-    	imgWidth(file, degree);
-    }    
-	public static void imgWidthAuto(String dirPath) throws IOException{
+		extendWidth(file, degree);
+    }
+	//按目录拓展图片宽度（0,360）
+	public static void extendWidthBatch(String dirPath) throws IOException{
 		 /** 
         * 要处理的图片目录 
         */ 
@@ -212,7 +206,7 @@ public class ImgTool {
        	dirOut.mkdir();
        }
        for (File file : files) {
-		imgWidth(file, 0);
+		   extendWidth(file, 0);
        }
 	}
 }
