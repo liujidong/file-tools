@@ -9,6 +9,9 @@ import java.util.regex.Matcher;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.MultimediaInfo;
 
+/**
+ * 读取微信视频目录中的视频信息
+ */
 public class VideoInfoTest {
 	public static void main(String[] args) {
 		String dir = "D:\\WeChat_Files\\WeChat Files\\wxid_f5muak2c9z8b22\\FileStorage\\Video\\";

@@ -2,9 +2,14 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/**
+ * 图片颜色工具类
+ * 0,0,0:黑色；255，255，255：白色
+ * @author 15833
+ */
 public class BufferedImageUtil {
     public static void main(String[] args) throws Exception{
-        BufferedImage img =  ImageIO.read(new File("D:\\data\\PANO\\out\\PANO_20220128_154x.jpg"));
+        BufferedImage img =  ImageIO.read(new File("D:\\code-python\\opencv-test\\Gray.jpg"));
         long rs = 0,gs=0,bs=0;
         int width = img.getWidth();
         for(int y = 0; y < img.getHeight(); y++) {
@@ -30,7 +35,7 @@ public class BufferedImageUtil {
         int r0 = (int)(rs/(img.getHeight()*width));
         int g0 = (int)(gs/(img.getHeight()*width));
         int b0 = (int)(bs/(img.getHeight()*width));
-        System.out.printf("(%d,%d,%d)",r0,g0,b0);
+        System.out.printf("平均值：(%d,%d,%d)",r0,g0,b0);
 //        BufferedImage imgOut =  new BufferedImage(100, 100,BufferedImage.TYPE_INT_RGB);// 1.创建空白图片
 //        for(int y = 0; y < imgOut.getHeight(); y++) {
 //            for (int x = 0; x < imgOut.getWidth(); x++) {
