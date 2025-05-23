@@ -6,13 +6,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 照片补全工具
+ * @author Administrator
+ */
 public class ImgTool {
 	public static void main(String[] args) throws Exception{
 		//imageSub();
 		//extendWidth("D:\\data\\PANO\\PANO_20211211_151937.jpg", 45);
-		//extendWidth("D:\\data\\PANO\\PANO_20211211_152151.jpg", 45);
+		//extendWidth("E:\\Data\\pano_20230502\\tmp\\IMG_20230502_0937xx.jpg", 25);
 		//imgWidthAuto("C:\\Users\\USER\\Pictures\\PANO\\");
-		pano2_1("D:\\data\\PANO2\\join");
+		pano2_1("E:\\Data\\pano_20230916\\out");
 
 	}
 	
@@ -30,7 +34,7 @@ public class ImgTool {
 			@Override
 			public boolean accept(File dir, String name) {
 				//return Arrays.asList(".png",".jpg").contains(name);
-				return name.endsWith(".jpg") || name.endsWith(".png")||name.endsWith(".JPG");
+				return name.endsWith(".jpg") ||name.endsWith(".jpeg") || name.endsWith(".png")||name.endsWith(".JPG");
 			}
 		});
         //创建输出目录

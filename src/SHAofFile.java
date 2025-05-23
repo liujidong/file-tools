@@ -2,6 +2,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 
+/**
+ * SHA加密工具类
+ * @author Administrator
+ */
 public class SHAofFile {
 
 	public static void main(String[] args) throws Exception{
