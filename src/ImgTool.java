@@ -16,7 +16,7 @@ public class ImgTool {
 		//extendWidth("D:\\data\\PANO\\PANO_20211211_151937.jpg", 45);
 		//extendWidth("E:\\Data\\pano_20230502\\tmp\\IMG_20230502_0937xx.jpg", 25);
 		//imgWidthAuto("C:\\Users\\USER\\Pictures\\PANO\\");
-		pano2_1("E:\\Data\\pano_20230916\\out");
+		pano2_1("E:\\share\\todo");
 
 	}
 	
@@ -46,6 +46,8 @@ public class ImgTool {
          * 遍历数组 
          */ 
         for(int x=0;x<files.length;x++){
+			String fileName = files[x].getName();
+			System.out.print(fileName);
 	         /** 
 	          * 定义一个RGB的数组，因为图片的RGB模式是由三个 0-255来表示的 比如白色就是(255,255,255) 
 	          */ 
@@ -60,23 +62,22 @@ public class ImgTool {
 	           */ 
 	          bi = ImageIO.read(files[x]); 
 	         } catch (Exception e) { 
-	          e.printStackTrace(); 
+	          e.printStackTrace();
+	          continue;
 	         } 
 	         /** 
 	          * 得到图片的长宽 
 	          */ 
 	         int width = bi.getWidth(); 
 	         int height = bi.getHeight();
-	         if(width/height<=2) {
-	        	 System.out.println("w:h is ["+width/height+":1]	"+files[x].getName());
+	         double ratio = (double)width/height;
+			System.out.println("	w:h is ["+ratio+":1]");
+	         if(ratio<=2) {
+	        	 System.out.println("宽高无需处理");
 	        	 continue;
 	        }
-	         if(width/height<4) {
-	        	 System.out.println("w:h is "+width/height+":1	"+files[x].getName());
-	         }
 //	         int minx = bi.getMinX(); 
-//	         int miny = bi.getMinY(); 
-	         String fileName = files[x].getName();
+//	         int miny = bi.getMinY();
 	         System.out.println("正在处理："+fileName);
 	         //System.out.println(width+","+minx+","+miny);
 	         /** 
